@@ -1,6 +1,11 @@
+import os.path
+
 from icrawler.builtin import GoogleImageCrawler
 
 def download_cats(keyword: str, num: int, dir: str):
+
+    if not os.path.exists(dir):
+        os.mkdir(dir)
 
     google_crawler = GoogleImageCrawler(
         feeder_threads=1,
