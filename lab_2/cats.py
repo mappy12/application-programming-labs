@@ -2,7 +2,7 @@ import os.path
 
 from icrawler.builtin import GoogleImageCrawler
 
-def download_cats(keyword: str, num: int, dir: str):
+def download_cats(keyword: str, num: int, dir: str) -> None:
 
     if not os.path.exists(dir):
         os.mkdir(dir)
