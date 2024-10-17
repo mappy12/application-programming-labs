@@ -2,6 +2,11 @@ import csv
 
 class CatsIterator:
 
+    """
+    Custom image iterator class
+    This iterator iterates over absolute and relative paths to cat images.
+    """
+
     def __init__(self, path_to_csv: str):
         self.path_to_csv = path_to_csv
 
@@ -15,7 +20,7 @@ class CatsIterator:
     def __next__(self):
 
         try:
-            self.csvreader.__next__()
+            return self.csvreader.__next__()
         except StopIteration:
             self.image_paths.close()
             raise StopIteration
