@@ -6,7 +6,7 @@ from numpy.ma.core import absolute
 
 def create_csv(path_to_images: str, path_to_csv: str) -> None:
 
-    with open("path_to_csv", 'w', newline='', encoding='utf-8') as file:
+    with open(path_to_csv, 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         headers = ['Absolute Path', 'Relative Path']
         writer.writerow(headers)
