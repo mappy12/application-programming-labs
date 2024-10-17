@@ -1,8 +1,8 @@
 import argparse
 
+from iterator import CatsIterator
 from csv_cats import create_csv
 from cats import download_cats
-from iterator import CatsIterator
 
 def parse_arguments():
 
@@ -23,7 +23,7 @@ def main():
 
     args = parse_arguments()
 
-    download_cats(args.keyword, 10, args.path_to_images)
+    download_cats(args.keyword, 50, args.path_to_images)
     create_csv(args.path_to_images, args.path_to_csv)
 
     iterator = CatsIterator(args.path_to_csv)
