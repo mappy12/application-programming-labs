@@ -13,6 +13,9 @@ def parser_create():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('name_of_input_image', type=str, help='Name of input image')
+    parser.add_argument('height', type=int, help="New image height")
+    parser.add_argument('width', type=int, help="New image width")
+
     return parser.parse_args()
 
 def main():
@@ -26,6 +29,8 @@ def main():
     list_of_histograms = create_hist(img)
     draw_histogram(list_of_histograms)
 
+    resized_img = resize_image(img, args.width, args.height)
+    show_image(resized_img)
 
 if __name__ == "__main__":
     main()

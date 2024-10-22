@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 from numpy import ndarray
 import os
 
+from numpy.ma.core import resize
+
+
 def read_image(name_of_input_image: str):
 
     img = cv2.imread(name_of_input_image)
@@ -19,4 +22,9 @@ def show_image(img: ndarray) -> ndarray:
 
     return img
 
+def resize_image(img: ndarray, width: int, height: int):
 
+    new_size = (width, height)
+
+    resized_img = cv2.resize(img, new_size, interpolation=cv2.INTER_LINEAR)
+    return resized_img
