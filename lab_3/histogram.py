@@ -2,7 +2,13 @@ import cv2
 import matplotlib.pyplot as plt
 from numpy import ndarray
 
-def create_hist(img: ndarray):
+
+def create_hist(img: ndarray) -> list:
+    """
+    Creates histograms for each color channel
+    :param img: The image as a NumPy array
+    :return: A list of histograms for each color channel
+    """
 
     list_of_histograms = []
 
@@ -12,11 +18,15 @@ def create_hist(img: ndarray):
 
     return list_of_histograms
 
-def draw_histogram(list_of_histograms: list):
+
+def draw_histogram(list_of_histograms: list) -> None:
+    """
+    Plots and displays the histograms for each color channel
+    :param list_of_histograms: A list of histograms for each color channel.
+    """
 
     colors = ['b','g','r']
     labels = ['Blue channel', 'Green channel', 'Red channel']
-
 
     plt.figure(figsize=(10,5))
 
@@ -29,4 +39,3 @@ def draw_histogram(list_of_histograms: list):
 
     plt.legend()
     plt.show()
-

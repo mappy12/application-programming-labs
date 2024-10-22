@@ -7,8 +7,11 @@ from histogram import *
 from image_action import *
 
 
-
-def parser_create():
+def parser_create() -> tuple:
+    """
+    Parses the arguments from terminal
+    :return: tuple of arguments
+    """
 
     parser = argparse.ArgumentParser()
 
@@ -18,6 +21,7 @@ def parser_create():
     parser.add_argument('width', type=int, help="New image width")
 
     return parser.parse_args()
+
 
 def main():
 
@@ -34,6 +38,7 @@ def main():
     show_image(resized_img)
 
     save_output_image(resized_img, args.name_of_output_image)
+
 
 if __name__ == "__main__":
     main()
