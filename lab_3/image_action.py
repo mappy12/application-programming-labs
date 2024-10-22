@@ -28,3 +28,6 @@ def resize_image(img: ndarray, width: int, height: int):
 
     resized_img = cv2.resize(img, new_size, interpolation=cv2.INTER_LINEAR)
     return resized_img
+
+def save_output_image(resized_img: ndarray, name_of_output_image: str):
+    cv2.imwrite(name_of_output_image, resized_img)
