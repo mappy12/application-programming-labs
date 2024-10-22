@@ -20,7 +20,8 @@ def main():
     args = parser_create()
     name_of_input_image = args.name_of_input_image + '.jpg'
 
-    img = show_image(name_of_input_image)
+    img = read_image(name_of_input_image)
+    show_image(img)
 
     list_of_histograms = create_hist(img)
     draw_histogram(list_of_histograms)
