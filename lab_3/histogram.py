@@ -12,6 +12,21 @@ def create_hist(img: ndarray):
 
     return list_of_histograms
 
+def draw_histogram(list_of_histograms: list):
+
+    colors = ['b','g','r']
+    labels = ['Blue channel', 'Green channel', 'Red channel']
 
 
+    plt.figure(figsize=(10,5))
+
+    for i, hist in enumerate(list_of_histograms):
+        plt.plot(hist, color = colors[i], label = labels[i])
+
+    plt.title('Histogram of image')
+    plt.xlabel('Pixel intensity value')
+    plt.ylabel('Number of pixels')
+
+    plt.legend()
+    plt.show()
 

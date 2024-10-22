@@ -1,9 +1,11 @@
 import argparse
-import os
-from argparse import ArgumentParser
-
 import cv2
 import matplotlib.pyplot as plt
+import os
+
+from histogram import *
+
+
 
 def parser_create():
 
@@ -24,6 +26,14 @@ def main():
     height, width = img.shape[:2]
 
     print(f"Высота изображения: {height}\nШирина изображения: {width}")
+
+    plt.figure(figsize=(10,5))
+
+    list_of_histograms = create_hist(img)
+    draw_histogram(list_of_histograms)
+
+
+
 
 if __name__ == "__main__":
     main()
