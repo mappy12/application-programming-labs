@@ -25,14 +25,20 @@ def parser_create() -> tuple:
 
 def main():
 
-    args = parser_create()
-    name_of_input_image = args.name_of_input_image + '.jpg'
+    try:
+        args = parser_create()
+        name_of_input_image = args.name_of_input_image + '.jpg'
 
-    img = read_image(name_of_input_image)
-    show_image(img)
+        img = read_image(name_of_input_image)
+        show_image(img)
+    except Exception:
+        print('Невозможно прочитать изображение')
 
-    list_of_histograms = create_hist(img)
-    draw_histogram(list_of_histograms)
+    try:
+        list_of_histograms = create_hist(img)
+        draw_histogram(list_of_histograms)
+    except Exception:
+        print('Невозможно построить гистограмму')
 
     resized_img = resize_image(img, args.width, args.height)
     show_image(resized_img)
