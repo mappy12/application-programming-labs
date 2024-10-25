@@ -29,6 +29,8 @@ def main():
     df['Width'] = widths
     df['Channels'] = channels_list
 
+    stats = df.describe()
+    print(stats)
 
 if __name__ == "__main__":
     main()
