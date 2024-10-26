@@ -23,9 +23,21 @@ def create_new_df(max_height: int, max_width: int):
         new_heights.append(height)
         new_widths.append(width)
 
+    df['Height'] = new_heights
+    df['Width'] = new_widths
+
+    print(df['Height'].max())
+
     filtered_df = df[(df['Height'] < max_height) & (df['Width'] < max_width)]
 
-    print(filtered_df)
+    return filtered_df
+
+def get_area(df: pd.DataFrame) -> pd.DataFrame:
+
+    df['Area'] = df['Height'] * df['Width']
+
+    return df
+
 
 
 def main():
@@ -51,7 +63,13 @@ def main():
     stats = df.describe()
     print(stats)
 
-    create_new_df(stats['Height'].max(), stats['Width'].max())
+    df = create_new_df(stats['Height'].max(), stats['Width'].max())
+
+    df = get_area(df)
+
+    sorted_df = df.sort_values(by='Area', ascending=True)
+
+
 
 if __name__ == "__main__":
     main()
