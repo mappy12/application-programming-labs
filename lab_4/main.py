@@ -1,74 +1,48 @@
-import cv2
-import numpy as np
+import argparse
+
+import matplotlib.pyplot as plt
 import pandas as pd
 
-def get_dementions(path_to_image: str):
+from dataFrame import *
 
-    img = cv2.imread(path_to_image)
 
-    height, width, channels = img.shape
-    return height, width, channels
+def create_hist(df: pd.DataFrame) -> None:
 
-def create_new_df(max_height: int, max_width: int):
-    df = pd.read_csv('catsCsv')
+    plt.figure(figsize=(10,5))
+    plt.hist(df['Area'])
+    plt.title('Area distribution')
+    plt.xlabel('Area')
+    plt.ylabel('Frequency')
+    plt.show()
 
-    df.columns = ['Absolute Path', 'Relative Path']
 
-    new_heights = []
-    new_widths = []
+def parser_create() -> argparse.Namespace:
 
-    for index, row in df.iterrows():
-        height, width, channels =  get_dementions(row['Absolute Path'])
-
-        new_heights.append(height)
-        new_widths.append(width)
-
-    df['Height'] = new_heights
-    df['Width'] = new_widths
-
-    print(df['Height'].max())
-
-    filtered_df = df[(df['Height'] < max_height) & (df['Width'] < max_width)]
-
-    return filtered_df
-
-def get_area(df: pd.DataFrame) -> pd.DataFrame:
-
-    df['Area'] = df['Height'] * df['Width']
-
-    return df
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path_to_csv', type=str, help='Path to csv file')
+    return parser.parse_args()
 
 
 def main():
-    df = pd.read_csv("catsCsv")
+
+    args = parser_create()
+
+    df = pd.read_csv(args.path_to_csv)
 
     df.columns = ['Absolute Path', 'Relative Path']
 
-    heights = []
-    widths = []
-    channels_list = []
-
-    for index, row in df.iterrows():
-        height, width, channels =  get_dementions(row['Absolute Path'])
-
-        heights.append(height)
-        widths.append(width)
-        channels_list.append(channels)
-
-    df['Height'] = heights
-    df['Width'] = widths
-    df['Channels'] = channels_list
+    df = add_dementions(df)
 
     stats = df.describe()
     print(stats)
 
-    df = create_new_df(stats['Height'].max(), stats['Width'].max())
+    df = create_filtered_df(stats['Height'].max(), stats['Width'].max())
 
     df = get_area(df)
 
     sorted_df = df.sort_values(by='Area', ascending=True)
 
+    create_hist(sorted_df)
 
 
 if __name__ == "__main__":
