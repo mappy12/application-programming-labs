@@ -2,12 +2,31 @@ import cv2
 import numpy as np
 import pandas as pd
 
-def get_dementions(path_to_image):
+def get_dementions(path_to_image: str):
 
     img = cv2.imread(path_to_image)
 
     height, width, channels = img.shape
     return height, width, channels
+
+def create_new_df(max_height: int, max_width: int):
+    df = pd.read_csv('catsCsv')
+
+    df.columns = ['Absolute Path', 'Relative Path']
+
+    new_heights = []
+    new_widths = []
+
+    for index, row in df.iterrows():
+        height, width, channels =  get_dementions(row['Absolute Path'])
+
+        new_heights.append(height)
+        new_widths.append(width)
+
+    filtered_df = df[(df['Height'] < max_height) & (df['Width'] < max_width)]
+
+    print(filtered_df)
+
 
 def main():
     df = pd.read_csv("catsCsv")
@@ -31,6 +50,8 @@ def main():
 
     stats = df.describe()
     print(stats)
+
+    create_new_df(stats['Height'].max(), stats['Width'].max())
 
 if __name__ == "__main__":
     main()
