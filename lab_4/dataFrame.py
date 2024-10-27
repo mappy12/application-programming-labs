@@ -9,10 +9,23 @@ def get_dementions(path_to_image: str) -> tuple:
     :return: A tuple for each image consisting of its height, width and number of channels.
     """
 
-    img = cv2.imread(path_to_image)
+    try:
+        img = cv2.imread(path_to_image)
 
-    height, width, channels = img.shape
-    return height, width, channels
+        if img is None:
+            raise FileNotFoundError(f"Image not found or cannot be opened: {path_to_image}")
+
+        height, width, channels = img.shape
+        return height, width, channels
+
+    except FileNotFoundError as e:
+        print(e)
+        return None, None, None
+
+    except Exception as e:
+        print(f"An error occurred while getting dimensions for {path_to_image}: {e}")
+        return None, None, None
+
 
 
 def add_dementions(df: pd.DataFrame) -> pd.DataFrame:
@@ -41,7 +54,7 @@ def add_dementions(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def create_filtered_df(max_height: int, max_width: int) -> pd.DataFrame:
+def create_filtered_df(path_to_csv: str, max_height: int, max_width: int) -> pd.DataFrame:
     """
     A function that filters a date frame by a given condition.
     (height <= max_height и width <= max_width)
@@ -50,10 +63,13 @@ def create_filtered_df(max_height: int, max_width: int) -> pd.DataFrame:
     :param max_width: Maximum width in source DataFrame
     :return: Filtered DataFrame
     """
+    try:
+        df = pd.read_csv(path_to_csv)
+        df.columns = ['Absolute Path', 'Relative Path']
 
-    df = pd.read_csv('catsCsv')
-
-    df.columns = ['Absolute Path', 'Relative Path']
+    except FileNotFoundError:
+        print("Error: CSV file 'catsCsv' not found. Please check the path.")
+        exit(1)
 
     new_heights = []
     new_widths = []

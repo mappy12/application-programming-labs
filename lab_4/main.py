@@ -37,24 +37,28 @@ def parser_create() -> argparse.Namespace:
 
 def main():
 
-    args = parser_create()
+    try:
+        args = parser_create()
 
-    create_csv(args.path_to_csv)
-    df = pd.read_csv(args.path_to_csv)
-    df.columns = ['Absolute Path', 'Relative Path']
+        create_csv(args.path_to_csv)
+        df = pd.read_csv(args.path_to_csv)
+        df.columns = ['Absolute Path', 'Relative Path']
 
-    df = add_dementions(df)
+        df = add_dementions(df)
 
-    stats = df.describe()
-    print(stats)
+        stats = df.describe()
+        print(stats)
 
-    df = create_filtered_df(args.max_height, args.max_width)
+        df = create_filtered_df(args.path_to_csv,args.max_height, args.max_width)
 
-    df = get_area(df)
+        df = get_area(df)
 
-    sorted_df = df.sort_values(by='Area', ascending=True)
+        sorted_df = df.sort_values(by='Area', ascending=True)
 
-    create_hist(sorted_df)
+        create_hist(sorted_df)
+
+    except Exception as e:
+        print(f"An unexpected error occurred in the main function: {e}")
 
 
 if __name__ == "__main__":

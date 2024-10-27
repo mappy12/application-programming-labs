@@ -11,12 +11,23 @@ def create_csv(path_to_csv: str) -> None:
     :param path_to_csv: Path to csv annotation
     """
 
+    if not os.path.exists('catsImg'):
+        print("Error: Directory 'catsImg' does not exist. Please create it and add images.")
+        exit(1)
+
     with open(path_to_csv, 'w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
 
-        for image in os.listdir('catsImg'):
+        try:
+            writer = csv.writer(file)
 
-            relative_path = os.path.join('catsImg', image)
-            absolute_path = os.path.abspath(relative_path)
+            for image in os.listdir('catsImg'):
 
-            writer.writerow([absolute_path, relative_path])
+                relative_path = os.path.join('catsImg', image)
+                absolute_path = os.path.abspath(relative_path)
+
+                writer.writerow([absolute_path, relative_path])
+
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+            exit(1)
+
