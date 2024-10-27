@@ -30,6 +30,8 @@ def parser_create() -> argparse.Namespace:
 
     parser = argparse.ArgumentParser()
     parser.add_argument('path_to_csv', type=str, help='Path to csv file')
+    parser.add_argument('max_height', type=int, help='Maximum image height')
+    parser.add_argument('max_width', type=int, help='Maximum image width')
     return parser.parse_args()
 
 
@@ -46,7 +48,7 @@ def main():
     stats = df.describe()
     print(stats)
 
-    df = create_filtered_df(stats['Height'].max(), stats['Width'].max())
+    df = create_filtered_df(args.max_height, args.max_width)
 
     df = get_area(df)
 
