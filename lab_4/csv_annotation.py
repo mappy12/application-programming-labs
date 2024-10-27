@@ -5,7 +5,8 @@ import os
 def create_csv(path_to_csv: str) -> None:
 
     """
-    A function that creates csv annotation of absolute and relative paths to images
+    A function that creates csv annotation of absolute and relative paths to images.
+    This is necessary in order to get the paths on each computer again.
 
     :param path_to_csv: Path to csv annotation
     """

@@ -7,6 +7,11 @@ from csv_annotation import *
 
 
 def create_hist(df: pd.DataFrame) -> None:
+    """
+    A function that creates a histogram of image area distribution.
+
+    :param df: DataFrame
+    """
 
     plt.figure(figsize=(10,5))
     plt.hist(df['Area'])
@@ -17,6 +22,11 @@ def create_hist(df: pd.DataFrame) -> None:
 
 
 def parser_create() -> argparse.Namespace:
+    """
+    Parses the arguments from terminal
+
+    :return: Namespace of arguments
+    """
 
     parser = argparse.ArgumentParser()
     parser.add_argument('path_to_csv', type=str, help='Path to csv file')
