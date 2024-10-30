@@ -17,17 +17,11 @@ def create_csv(path_to_csv: str) -> None:
 
     with open(path_to_csv, 'w', newline='', encoding='utf-8') as file:
 
-        try:
-            writer = csv.writer(file)
+        writer = csv.writer(file)
 
-            for image in os.listdir('catsImg'):
+        for image in os.listdir('catsImg'):
 
-                relative_path = os.path.join('catsImg', image)
-                absolute_path = os.path.abspath(relative_path)
+            relative_path = os.path.join('catsImg', image)
+            absolute_path = os.path.abspath(relative_path)
 
-                writer.writerow([absolute_path, relative_path])
-
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            exit(1)
-
+            writer.writerow([absolute_path, relative_path])

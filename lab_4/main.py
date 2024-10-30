@@ -1,4 +1,5 @@
 import argparse
+
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -41,8 +42,7 @@ def main():
         args = parser_create()
 
         create_csv(args.path_to_csv)
-        df = pd.read_csv(args.path_to_csv)
-        df.columns = ['Absolute Path', 'Relative Path']
+        df = load_dataframe(args.path_to_csv)
 
         df = add_dementions(df)
 
