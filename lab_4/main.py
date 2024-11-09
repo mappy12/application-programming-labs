@@ -30,6 +30,7 @@ def parser_create() -> argparse.Namespace:
     """
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('path_to_images', type=str, help='Path to images')
     parser.add_argument('path_to_csv', type=str, help='Path to csv file')
     parser.add_argument('max_height', type=int, help='Maximum image height')
     parser.add_argument('max_width', type=int, help='Maximum image width')
@@ -41,7 +42,7 @@ def main():
     try:
         args = parser_create()
 
-        create_csv(args.path_to_csv)
+        create_csv(args.path_to_csv, args.path_to_images)
         df = load_dataframe(args.path_to_csv)
 
         df = add_dementions(df)

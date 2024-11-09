@@ -2,7 +2,7 @@ import csv
 import os
 
 
-def create_csv(path_to_csv: str) -> None:
+def create_csv(path_to_csv: str, path_to_images: str) -> None:
 
     """
     A function that creates csv annotation of absolute and relative paths to images.
@@ -11,17 +11,17 @@ def create_csv(path_to_csv: str) -> None:
     :param path_to_csv: Path to csv annotation
     """
 
-    if not os.path.exists('catsImg'):
-        print("Error: Directory 'catsImg' does not exist. Please create it and add images.")
+    if not os.path.exists(path_to_images):
+        print("Error: Directory does not exist. Please create it and add images.")
         exit(1)
 
     with open(path_to_csv, 'w', newline='', encoding='utf-8') as file:
 
         writer = csv.writer(file)
 
-        for image in os.listdir('catsImg'):
+        for image in os.listdir(path_to_images):
 
-            relative_path = os.path.join('catsImg', image)
+            relative_path = os.path.join(path_to_images, image)
             absolute_path = os.path.abspath(relative_path)
 
             writer.writerow([absolute_path, relative_path])
