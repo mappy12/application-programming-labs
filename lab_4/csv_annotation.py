@@ -9,11 +9,11 @@ def create_csv(path_to_csv: str, path_to_images: str) -> None:
     This is necessary in order to get the paths on each computer again.
 
     :param path_to_csv: Path to csv annotation
+    :param path_to_images: Path to images dir
     """
 
     if not os.path.exists(path_to_images):
-        print("Error: Directory does not exist. Please create it and add images.")
-        exit(1)
+        raise FileNotFoundError
 
     with open(path_to_csv, 'w', newline='', encoding='utf-8') as file:
 

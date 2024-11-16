@@ -3,6 +3,12 @@ import pandas as pd
 
 
 def load_dataframe(path_to_csv: str) -> pd.DataFrame:
+    """
+    Loads data from a csv file into a DataFrame.
+
+    :param path_to_csv: Path to csv-file
+    :return: Loaded DataFrame
+    """
 
     df = pd.read_csv(path_to_csv)
     df.columns = ['Absolute_Path', 'Relative_Path']
@@ -53,17 +59,16 @@ def add_dementions(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def create_filtered_df(path_to_csv: str, max_height: int, max_width: int) -> pd.DataFrame:
+def create_filtered_df(df: pd.DataFrame, max_height: int, max_width: int) -> pd.DataFrame:
     """
     A function that filters a date frame by a given condition.
     (height <= max_height и width <= max_width)
 
+    :param df: Source DataFrame
     :param max_height: Maximum height in source DataFrame
     :param max_width: Maximum width in source DataFrame
     :return: Filtered DataFrame
     """
-
-    df = load_dataframe(path_to_csv)
 
     new_heights = []
     new_widths = []

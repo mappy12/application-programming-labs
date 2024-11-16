@@ -1,25 +1,8 @@
 import argparse
 
-import matplotlib.pyplot as plt
-import pandas as pd
-
-from dataFrame import *
 from csv_annotation import *
-
-
-def create_hist(df: pd.DataFrame) -> None:
-    """
-    A function that creates a histogram of image area distribution.
-
-    :param df: DataFrame
-    """
-
-    plt.figure(figsize=(10,5))
-    plt.hist(df['Area'])
-    plt.title('Area distribution')
-    plt.xlabel('Area')
-    plt.ylabel('Frequency')
-    plt.show()
+from dataFrame import *
+from histogram import *
 
 
 def parser_create() -> argparse.Namespace:
@@ -50,7 +33,7 @@ def main():
         stats = df.describe()
         print(stats)
 
-        df = create_filtered_df(args.path_to_csv,args.max_height, args.max_width)
+        df = create_filtered_df(df,args.max_height, args.max_width)
 
         df = get_area(df)
 
