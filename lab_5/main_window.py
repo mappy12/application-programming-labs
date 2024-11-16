@@ -5,22 +5,10 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 
 class Window(QMainWindow):
     def __init__(self):
-        super(Window, self).__init__()
+        super().__init__()
 
-        self.setWindowTitle("LAB 5")
-        self.setGeometry(300, 250, 350, 200)
+        self.setWindowTitle("Image Viewer")
 
-        self.new_text = QtWidgets.QLabel(self)
-
-        self.main_text = QtWidgets.QLabel(self)
-        self.main_text.setText("Мой графический интерфейс")
-        self.main_text.adjustSize()
-
-        self.btn = QtWidgets.QPushButton(self)
-        self.btn.move(0, 25)
-        self.btn.setText("Добавить")
-        self.btn.adjustSize()
-        self.btn.clicked.connect(self.add_label)
 
     def add_label(self):
         self.new_text.setText("Привет!")
