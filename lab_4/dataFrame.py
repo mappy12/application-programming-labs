@@ -70,18 +70,6 @@ def create_filtered_df(df: pd.DataFrame, max_height: int, max_width: int) -> pd.
     :return: Filtered DataFrame
     """
 
-    new_heights = []
-    new_widths = []
-
-    for index, row in df.iterrows():
-        height, width, channels =  get_dementions(row['Absolute_Path'])
-
-        new_heights.append(height)
-        new_widths.append(width)
-
-    df['Height'] = new_heights
-    df['Width'] = new_widths
-
     filtered_df = df[(df['Height'] < max_height) & (df['Width'] < max_width)]
 
     return filtered_df

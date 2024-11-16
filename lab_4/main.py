@@ -33,7 +33,7 @@ def main():
         stats = df.describe()
         print(stats)
 
-        df = create_filtered_df(df,args.max_height, args.max_width)
+        df = create_filtered_df(df, args.max_height, args.max_width)
 
         df = get_area(df)
 
