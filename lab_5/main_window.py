@@ -38,17 +38,18 @@ class Window(QMainWindow):
 
         self.opencsv_button = QPushButton("Open csv-file")
         self.opencsv_button.clicked.connect(self.setup_file_dialog)
-        self.opencsv_button.setFixedSize(200,50)
+        self.opencsv_button.setFixedSize(1000, 50)
+        self.opencsv_button.setStyleSheet("border: 2px solid #ababab; border-radius: 5px; background-color: #737373;")
 
         self.next_button = QPushButton("Next image")
         self.next_button.clicked.connect(self.show_next_image)
         self.next_button.setEnabled(False)
-        self.next_button.setFixedSize(200,50)
-
+        self.next_button.setFixedSize(1000, 50)
+        self.next_button.setStyleSheet("border: 2px solid #ababab; border-radius: 5px; background-color: #737373;")
 
         layout.addWidget(self.label)
-        layout.addWidget(self.opencsv_button, alignment=Qt.AlignCenter)
-        layout.addWidget(self.next_button, alignment=Qt.AlignCenter)
+        layout.addWidget(self.next_button, alignment=Qt.AlignHCenter)
+        layout.addWidget(self.opencsv_button, alignment=Qt.AlignHCenter)
 
     def setup_file_dialog(self):
         csv_path, _ = QFileDialog.getOpenFileName(self, "Select CSV-file", "", "CSV file (*.csv)")
@@ -68,10 +69,18 @@ class Window(QMainWindow):
            self.display_image(self.current_image)
         except StopIteration:
             self.label.setText("No more images")
+            self.next_button.setEnabled(False)
 
     def display_image(self, image):
-        pixmap = QPixmap(image)
-        self.label.setPixmap(pixmap.scaled(self.label.size(), Qt.KeepAspectRatio))
+        try:
+            pixmap = QPixmap(image)
+
+            if pixmap.isNull():
+                print("Invalid image file")
+
+            self.label.setPixmap(pixmap.scaled(self.label.size(), Qt.KeepAspectRatio))
+        except Exception as e:
+            print(f"Error loading image: {e}")
 
 
 def application():
