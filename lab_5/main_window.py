@@ -9,6 +9,9 @@ from iterator import CatsIterator
 
 class Window(QMainWindow):
     def __init__(self):
+        """
+        Constructor
+        """
         super().__init__()
 
         self.setWindowTitle("Image Viewer")
@@ -23,6 +26,10 @@ class Window(QMainWindow):
 
 
     def setup_main_window(self):
+        """
+        Sets up the main window layout, including a QLabel for image display
+        and two QPushButtons for file selection and navigation.
+        """
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
 
@@ -52,6 +59,9 @@ class Window(QMainWindow):
         layout.addWidget(self.opencsv_button, alignment=Qt.AlignHCenter)
 
     def setup_file_dialog(self):
+        """
+        Opens a file dialog to select a CSV file and initializes the image iterator.
+        """
         csv_path, _ = QFileDialog.getOpenFileName(self, "Select CSV-file", "", "CSV file (*.csv)")
         if csv_path:
             self.csv_path = csv_path
@@ -63,6 +73,9 @@ class Window(QMainWindow):
 
 
     def show_next_image(self):
+        """
+         Displays the next image from the iterator.
+        """
         try:
            image = next(self.image_iterator)
            self.current_image = image[0]
@@ -72,6 +85,10 @@ class Window(QMainWindow):
             self.next_button.setEnabled(False)
 
     def display_image(self, image):
+        """
+        Displays the image in the QLabel.
+        :param image: The path to the image.
+        """
         try:
             pixmap = QPixmap(image)
 
@@ -84,6 +101,9 @@ class Window(QMainWindow):
 
 
 def application():
+    """
+    Initializes and runs the application.
+    """
     app = QApplication(sys.argv)
     window = Window()
 
