@@ -2,7 +2,7 @@ import sys
 
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QLabel, QVBoxLayout, QWidget, QSizePolicy
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QLabel, QVBoxLayout, QWidget, QSizePolicy, QMessageBox
 
 from iterator import CatsIterator
 
@@ -93,11 +93,11 @@ class Window(QMainWindow):
             pixmap = QPixmap(image)
 
             if pixmap.isNull():
-                print("Invalid image file")
+                QMessageBox.critical(self, "Error", "Invalid image file.")
 
             self.label.setPixmap(pixmap.scaled(self.label.size(), Qt.KeepAspectRatio))
         except Exception as e:
-            print(f"Error loading image: {e}")
+            QMessageBox.critical(self, "Error", f"Error loading image: {str(e)}")
 
 
 def application():
