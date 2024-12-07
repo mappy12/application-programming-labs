@@ -21,9 +21,7 @@ class Window(QMainWindow):
         self.setup_main_window()
 
         self.csv_path = None
-        self.cats_iterator = None
         self.image_iterator = None
-
 
     def setup_main_window(self):
         """
@@ -70,7 +68,6 @@ class Window(QMainWindow):
 
             self.next_button.setEnabled(True)
             self.opencsv_button.setEnabled(False)
-
 
     def show_next_image(self):
         """
